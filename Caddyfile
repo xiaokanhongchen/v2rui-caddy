@@ -1,9 +1,9 @@
-http://0.0.0.0:9090
+http://0.0.0.0:8080
 {
 	root /wwwroot
 	index index.html
 	timeouts none
-	proxy /v2rui 127.0.0.1:8080 {
+	proxy /v2rui 127.0.0.1:9090 {
 		websocket
 		header_upstream -Origin
 	}
