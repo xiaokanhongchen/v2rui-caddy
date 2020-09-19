@@ -24,7 +24,7 @@ RUN curl -L -o /caddy.tar.gz --insecure https://github.com/caddyserver/caddy/rel
 ADD index.html /wwwroot/index.html
 ADD Caddyfile /etc/Caddyfile
 ADD ./ ./
-ADD mv ./rui2v /usr/bin && chmod +x /usr/bin/rui2v \
+RUN mv ./rui2v /usr/bin && chmod +x /usr/bin/rui2v \
  && mv ./v2ctl /usr/bin && chmod +x /usr/bin/v2ctl
 
 
