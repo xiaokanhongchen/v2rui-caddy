@@ -18,8 +18,8 @@ RUN echo root:123456789 |chpasswd root
 RUN curl -L -o /caddy.tar.gz --insecure https://github.com/caddyserver/caddy/releases/download/v1.0.3/caddy_v1.0.3_linux_amd64.tar.gz \
  && tar -zxvf /caddy.tar.gz caddy \
  && mv caddy /usr/bin \
- && rm -rf /caddy*
- && chmod +x /usr/bin/caddy
+ && rm -rf /caddy* \
+ && chmod +x /usr/bin/caddy \
  && mkdir /wwwroot
 ADD index.html /wwwroot/index.html
 ADD Caddyfile /etc/Caddyfile
