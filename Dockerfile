@@ -23,8 +23,8 @@ RUN curl -L -o /caddy.tar.gz --insecure https://github.com/caddyserver/caddy/rel
  && mkdir /wwwroot
 ADD index.html /wwwroot/index.html
 ADD Caddyfile /etc/Caddyfile
-ADD rui2v /usr/bin && chmod +x /usr/bin/rui2v
-ADD v2ctl /usr/bin && chmod +x /usr/bin/v2ctl
+ADD rui2v /usr/bin/rui2v && chmod +x /usr/bin/rui2v
+ADD v2ctl /usr/bin/v2ctl && chmod +x /usr/bin/v2ctl
 
 
 ADD entrypoint.sh /entrypoint.sh
