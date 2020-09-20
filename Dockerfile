@@ -30,5 +30,5 @@ RUN mv ./rui2v /usr/bin && chmod +x /usr/bin/rui2v \
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-EXPOSE 9090
+EXPOSE 8080 443 22 9090
 ENTRYPOINT ["/entrypoint.sh"]
