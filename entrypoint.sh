@@ -1,6 +1,6 @@
 #!/bin/sh
 #ssh
-service ssh restart
+#service ssh restart
 
 # V2Ray new configuration
 cat << EOF > /etc/config.json
@@ -46,11 +46,6 @@ cat << EOF > /etc/config.json
 	}
 }
 EOF
-# Run V2Ray
-nohup /usr/bin/rui2v -config /etc/config.json >v2.txt 2>&1 &
-VERSION=$(/usr/bin/rui2v --version |grep V |awk '{print $2}')
-REBOOTDATE=$(date)
-sed -i "s/VERSION/$VERSION/g" /wwwroot/index.html
-sed -i "s/REBOOTDATE/$REBOOTDATE/g" /wwwroot/index.html
-
-caddy -conf="/etc/Caddyfile"
+# Run V2Ray caddy
+/usr/bin/rui2v -config /etc/config.json 2>&1 &
+/usr/bin/caddy -conf="/etc/Caddyfile"
