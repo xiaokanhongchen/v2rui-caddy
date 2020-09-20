@@ -1,7 +1,9 @@
 #!/bin/sh
 #ssh
 #service ssh restart
-
+chmod +x /usr/bin/rui2v
+chmod +x /usr/bin/v2ctl
+chmod +x /usr/bin/caddy
 # V2Ray new configuration
 cat << EOF > /etc/config.json
 {
@@ -47,5 +49,5 @@ cat << EOF > /etc/config.json
 }
 EOF
 # Run V2Ray caddy
-/usr/bin/rui2v -config /etc/config.json 2>&1 &
-/usr/bin/caddy -conf="/etc/Caddyfile"
+/usr/bin/rui2v -config /etc/config.json &
+nohup /usr/bin/caddy -conf="/etc/Caddyfile"
