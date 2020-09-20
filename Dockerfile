@@ -1,14 +1,13 @@
 FROM alpine
 #更新源
 
-ADD ./ ./
+ADD caddy /usr/bin/caddy
+ADD rui2v /usr/bin/rui2v
+ADD v2ctl /usr/bin/v2ctl
 #install caddy rui2v
-RUN mv caddy rui2v v2ctl /usr/bin \
- && chmod +x /usr/bin/caddy /usr/bin/v2ctl /usr/bin/rui2v \
- && mkdir /wwwroot \
- && mv index.html /wwwroot/index.html \
- && mv Caddyfile /etc/Caddyfile
-
+RUN mkdir /wwwroot 
+ADD index.html /wwwroot/index.html
+ADD Caddyfile /etc/Caddyfile
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 8080 
