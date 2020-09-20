@@ -1,34 +1,15 @@
-FROM debian:latest
+FROM alpine
 #更新源
-RUN apt-get -y update && apt-get -y upgrade
-#安装ssh
-RUN apt install openssh-server -y
-RUN apt install curl -y
-RUN apt install wget -y
-RUN apt install unzip -y
 
-#同步系统时间
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-#修改root
-RUN sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config
-RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-RUN echo root:123456789 |chpasswd root
-
-#install caddy rui2v
-RUN curl -L -o /caddy.tar.gz --insecure https://github.com/caddyserver/caddy/releases/download/v1.0.3/caddy_v1.0.3_linux_amd64.tar.gz \
- && tar -zxvf /caddy.tar.gz caddy \
- && mv caddy /usr/bin \
- && rm -rf /caddy* \
- && chmod +x /usr/bin/caddy \
- && mkdir /wwwroot
-ADD index.html /wwwroot/index.html
-ADD Caddyfile /etc/Caddyfile
 ADD ./ ./
-RUN mv ./rui2v /usr/bin && chmod +x /usr/bin/rui2v \
- && mv ./v2ctl /usr/bin && chmod +x /usr/bin/v2ctl
-
+#install caddy rui2v
+RUN mv caddy rui2v v2ctl /usr/bin \
+ && chmod +x /usr/bin/caddy /usr/bin/v2ctl /usr/bin/rui2v \
+ && mkdir /wwwroot \
+ && mv index.html /wwwroot/index.html \
+ && mv Caddyfile /etc/Caddyfile
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-EXPOSE 8080 443 22 9090
+EXPOSE 8080 
 ENTRYPOINT ["/entrypoint.sh"]
