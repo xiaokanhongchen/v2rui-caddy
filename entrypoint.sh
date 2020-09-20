@@ -3,7 +3,7 @@
 service ssh restart
 
 # V2Ray new configuration
-cat <<-EOF > /etc/config.json
+cat << EOF > /etc/config.json
 {
 	"inbounds": [{
 		"port": "9090",
